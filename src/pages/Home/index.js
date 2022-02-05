@@ -5,13 +5,13 @@ import { HomeContainer, CardsArea } from './styles';
 
 import { Card } from '../../components/Card';
 
-export default function Home() {
+export default function Home({ offsetNumber }) {
   const [pokeList, setPokeList] = useState([]);
 
   useEffect(() => {
-    axios.get('https://pokeapi.co/api/v2/pokemon?limit=3&offset=5')
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=3&offset=${offsetNumber}`)
       .then(response => setPokeList(response.data.results));
-  }, []);
+  }, [offsetNumber]);
 
   return (
     <HomeContainer>

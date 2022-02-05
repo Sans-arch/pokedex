@@ -14,8 +14,6 @@ export function Card({ data }) {
     });
   }, [data.url]);
 
-  console.log(pokeInfo);
-
   return (
     <CardContainer>
       {data.name}
