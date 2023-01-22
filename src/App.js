@@ -1,12 +1,9 @@
-import { GlobalStyle } from './styles/global';
-
-import Layout from './components/Layout';
+import Home from './pages/Home';
 
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <Layout />
+      <Home />
     </>
   );
 }

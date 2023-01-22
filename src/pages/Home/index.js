@@ -1,25 +1,42 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Container, Grid } from '@mui/material';
+import PokeCard from '../../components/PokeCard';
+import Navbar from "../../components/Navbar";
 
-import { HomeContainer, CardsArea } from './styles';
-
-import { Card } from '../../components/Card';
-
-export default function Home({ offsetNumber }) {
-  const [pokeList, setPokeList] = useState([]);
+export default function Home() {
+  const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=3&offset=${offsetNumber}`)
-      .then(response => setPokeList(response.data.results));
-  }, [offsetNumber]);
+    getPokemons();
+  }, []);
+
+  const getPokemons = () => {
+    const endpoints = [];
+
+    for (let i = 1; i < 50; i++) {
+      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
+    }
+
+    axios.all(endpoints.map(endpoint => axios.get(endpoint)))
+      .then(res => setPokemons(res));
+  };
 
   return (
-    <HomeContainer>
-      <CardsArea>
-        {pokeList.map((pokemon, index) => (
-          <Card data={pokemon} key={index} />
-        ))}
-      </CardsArea>
-    </HomeContainer>
-  )
+    <>
+      <Navbar />
+      <Container maxWidth="false">
+        <Grid container spacing={3}>
+          {pokemons.map(pokemon => (
+            <Grid key={pokemon.data.name} item xs={2}>
+              <PokeCard
+                name={pokemon.data.name}
+                image={pokemon.data.sprites.front_default}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </>
+  );
 }
