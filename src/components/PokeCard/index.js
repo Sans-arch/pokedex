@@ -5,26 +5,23 @@ import Typography from '@mui/material/Typography';
 
 export default function PokeCard({ name, image }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, borderColor: "#292a2d" }}>
       <CardMedia
         component="img"
-        sx={{ height: 200 }}
+        sx={{ height: 200, border: "none" }}
         image={image}
         title="green iguana"
       />
-      <CardContent>
+      <CardContent sx={{
+        color: "black",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {name[0].toUpperCase() + name.substring(1)}
         </Typography>
-        {/* <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography> */}
       </CardContent>
-      {/* <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions> */}
     </Card>
   );
 }

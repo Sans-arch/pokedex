@@ -22,10 +22,26 @@ export default function Home() {
       .then(res => setPokemons(res));
   };
 
+  const pokemonFilter = (name) => {
+    console.log(name);
+    if (name === '') {
+      getPokemons();
+    }
+
+    const filteredPokemons = [];
+
+    for (let i in pokemons) {
+      if (pokemons[i].data.name.includes(name)) {
+        filteredPokemons.push(pokemons[i]);
+      }
+    }
+    setPokemons(filteredPokemons);
+  };
+
   return (
     <>
-      <Navbar />
-      <Container maxWidth="false">
+      <Navbar pokemonFilter={pokemonFilter} />
+      <Container maxWidth="false" sx={{ marginBottom: "2em" }}>
         <Grid container spacing={3}>
           {pokemons.map(pokemon => (
             <Grid key={pokemon.data.name} item xs={2}>
