@@ -1,23 +1,30 @@
 import { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle`
-  * {
+const GlobalStyle = createGlobalStyle`
+  body {
     margin: 0;
-    padding: 0;
-    font-weight: normal;
+    background-color: #22272e;
   }
 
-  body {
-    background: #282A36;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 14px;
+    /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 
-    div#root {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100vw;
-    }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 `;
+
+export default GlobalStyle;
